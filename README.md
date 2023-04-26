@@ -1,2 +1,2 @@
 # logstash-mysql-es-pipeline
-A basic functional pipeline for streaming mysql data to Elasticsearch
+A basic functional pipeline for streaming MySQL data to Elasticsearch
