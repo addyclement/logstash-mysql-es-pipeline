@@ -2,22 +2,22 @@ input {
   jdbc {
     jdbc_driver_library => "/usr/share/logstash/bin/mysql-connector-java-5.1.49.jar"
     jdbc_driver_class => "com.mysql.jdbc.Driver"
-    jdbc_connection_string => "jdbc:mysql://source-db.ce6wraevepxh.us-east-1.rds.amazonaws.com:3306/utilityappdb?autoReconnect=true&useSSL=false"
-    jdbc_user => "grafana"
-    jdbc_password => "password"
+    jdbc_connection_string => "jdbc:mysql://mysqldbdb.cxxxxxxx.us-east-2.rds.amazonaws.com:3306/dbname?autoReconnect=true&useSSL=false"
+    jdbc_user => "dbuser"
+    jdbc_password => "dbpassword"
     tracking_column => "rid"
     use_column_value=>true
-    statement => "SELECT * FROM vw_posvas_logs_v4 WHERE rid >:sql_last_value limit 50000;"
+    statement => "SELECT * FROM vw_daily_sales WHERE id >:sql_last_value limit 50000;"
     schedule => " * * * * * *"
-    last_run_metadata_path => "/usr/share/logstash/bin/es_posvas_jdbc_last_run_metadata.log"
+    last_run_metadata_path => "/usr/share/logstash/bin/es_sales_jdbc_last_run_metadata.log"
   }
 }
 output {
   elasticsearch {
     document_id=> "%{datakey}"
-    document_type => "processor_trans_06"
-    index => "posvas_index_06"
-    hosts => ["http://localhost:9200"]
+    document_type => "sales_trans"
+    index => "sales_index"
+    hosts => ["http://x.x.x.x:9200"] # accepts multiple hosts
   }
   stdout{
   codec => rubydebug
