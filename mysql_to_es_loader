@@ -7,7 +7,7 @@ input {
     jdbc_password => "dbpassword"
     tracking_column => "rid"
     use_column_value=>true
-    statement => "SELECT * FROM vw_daily_sales WHERE id >:sql_last_value limit 50000;"
+    statement => "SELECT * FROM vw_daily_sales WHERE rid >:sql_last_value limit 50000;"
     schedule => " * * * * * *"
     last_run_metadata_path => "/usr/share/logstash/bin/es_sales_jdbc_last_run_metadata.log"
   }
